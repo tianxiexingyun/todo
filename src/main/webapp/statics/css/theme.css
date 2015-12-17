@@ -1,0 +1,314 @@
+body {
+	padding-top: 0px;
+	font-size: 13px;
+}
+button, table, input, select, textarea {
+    border-radius: 0px !important;
+}
+legend {
+	padding-top: 18px;
+}
+/*--------------------------begin navbar--------------------------*/
+.navbar {
+	background-color: #000;
+	padding: 0 6px 0 0;
+}
+
+.navbar-fixed-top {
+	border: 0;
+}
+
+#navbar a {
+	font-weight: normal;
+}
+
+#navbar a:hover {
+	background-color: #F33;
+}
+
+.navbar-header .navbar-brand {
+	font-weight: bold;
+}
+/*---------------------------end navbar---------------------------*/
+
+/*--------------------------begin sidebar--------------------------*/
+.sidebar {
+	display: none;
+	border:1px solid #CCC;
+	border-width: 0px 1px 0px 0px;
+	background-color: #000000;
+}
+.sidebar-shortcuts{
+	background-color: #000;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	text-align: center;
+	line-height: 39px;
+	max-height: 41px;
+	margin-bottom: 0px;
+}
+.sidebar-shortcuts-large {
+	margin: 0;
+	padding: 0;
+	padding-bottom: 4px;
+}
+.sidebar-shortcuts-large>.btn {
+	display: inline-block;
+    line-height: 100%;
+	color: #FFF !important;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.25) !important;
+	background-image: none !important;
+	border: 0px solid #FFF;
+	border-radius: 0px;
+	box-shadow: none !important;
+	transition: all 0.15s ease 0s;
+	cursor: pointer;
+	vertical-align: middle;
+	position: relative;
+}
+.sidebar-shortcuts-mini{
+	display: none;
+	font-size: 0px;
+	width: 42px;
+	line-height: 18px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #000;
+}
+.sidebar-shortcuts-mini > .btn {
+    border-width: 0px !important;
+    font-size: 0px;
+    line-height: 0;
+    padding: 8px !important;
+    margin: 0px 1px;
+    border-radius: 0px !important;
+    opacity: 0.85;
+}
+.nav-sidebar {
+	margin: 0px;
+	padding: 0px;
+	list-style: outside none none;
+}
+.nav-sidebar>li {
+	display: block;
+	padding: 0px;
+	margin: 0px;
+    line-height: 100%;
+	border-bottom: 1px solid #333;
+	-moz-border-top-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+}
+.nav-sidebar> li > a {
+	color: #999;
+	text-shadow: none !important;
+	font-size: 13px;
+}
+.nav-sidebar> li > a:visted {
+	background-color: #F33;
+	color: #CCC;
+}
+.nav-sidebar> li > a:hover {
+	background-color: #F33;
+	color: #CCC;
+}
+.nav-sidebar> li > a:active {
+	background-color: #F33;
+	color: #CCC;
+}
+.nav-sidebar> li > a:focus {
+	background-color: #F33;
+	color: #CCC;
+}
+.nav-sidebar> li > a > i {
+	font-size: 16px;
+}
+.nav-sidebar >li > a > .arrow {
+    display: inline-block;
+    width: 14px !important;
+    text-shadow: none;
+    font-size: 13px;
+    position: absolute;
+    right: 11px;
+    top: 11px;
+    padding: 0px;
+}
+.nav-sidebar > li a > .menu-text {
+    margin-left: 6px;
+}
+
+.nav-sidebar > li .submenu {
+	overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    position: relative;
+    background-color: #000;
+    border-top: 1px solid #333;
+}
+.nav-sidebar > li > .submenu > li:last-of-type {
+	border-bottom: 0px;
+}
+.nav-sidebar > li > .submenu:before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    left: 18px;
+    top: 0;
+    bottom: 0;
+    border: 1px dotted #333;
+    border-width: 0 0 0 1px;
+}
+
+
+/*submenu anchor*/
+.nav-sidebar > li > .submenu > li > a:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 7px;
+    left: 20px;
+    top: 15px;
+    border-top: 1px dotted #333;
+}
+.nav-sidebar > li > .submenu > li > a {
+    display: block;
+    position: relative;
+    color: #999;
+    padding: 7px 0px 9px 37px;
+    margin: 0px;
+}
+.nav-sidebar > li > .submenu > li > a:visited {
+	text-decoration: none;
+	background-color: #F33;
+    color: #CCC;
+}
+.nav-sidebar > li > .submenu > li > a:hover {
+	text-decoration: none;
+	background-color: #F33;
+    color: #CCC;
+}
+.nav-sidebar > li > .submenu > li > a:active {
+	text-decoration: none;
+	background-color: #F33;
+    color: #CCC;
+}
+.nav-sidebar > li > .submenu > li > a:focus {
+	text-decoration: none;
+	background-color: #F33;
+    color: #CCC;
+}
+/*---------------------------end sidebar---------------------------*/
+
+/*---------------------------begin main---------------------------*/
+.main {
+	margin-top: 51px;
+	padding: 0px 12px;
+}
+.breadcrumbs {
+	display: none;
+	top: 51px;
+	max-height: 41px;
+	background-color: #FAFAFA;
+	border-bottom: 1px solid #DDD;
+	text-align: left;
+	line-height: 41px;
+}
+.breadcrumb {
+    background-color: transparent;
+    display: inline-block;
+    line-height: 24px;
+    padding: 0px;
+    font-size: 13px;
+    color: #333;
+    border-radius: 0px;
+}
+.breadcrumb .home-icon {
+    margin-left: 12px;
+    margin-right: 2px;
+    font-size: 20px;
+    position: relative;
+    top: 2px;
+}
+.breadcrumb > li > a {
+    display: inline-block;
+    padding: 0px 4px;
+    color: #4C8FBD;
+}
+.table > thead, tfoot > tr {
+    background: #307ecc linear-gradient(to bottom, #307ecc 0px, #307ecc 100%) repeat-x scroll 0 0;
+    color: #FFF;
+    font-weight: normal;
+}
+.table > tbody > tr {
+    background: #FFF linear-gradient(to bottom, #FFF 0px, #FFF 100%) repeat-x scroll 0 0;
+}
+.control-label, .control-input {
+	margin : 0px;
+	padding : 0px 5px; 
+}
+/*----------------------------end main----------------------------*/
+
+
+/*---------------------------begin for screen---------------------------*/
+@media ( min-width : 768px) {
+	.sidebar {
+		position: fixed;
+		top: 50px;
+		bottom: 0;
+		left: 0;
+		width: 180px;
+		z-index: 1000;
+		display: block;
+		padding: 0px;
+		border-style: solid #333 0px 1px 0px 0px;
+		background-color: #000;
+		overflow-x: hidden;
+		overflow-y: auto;
+		-moz-border-colors: none;
+	}
+	
+	.breadcrumbs {
+		display: block;
+		margin-left: 180px;
+	}
+	
+	.main {
+		margin-top: 100px;
+		margin-left: 180px;
+	}
+}
+/*---------------------------end for screen---------------------------*/
+
+/*---------------------------begin for custom theme---------------------------*/
+.table > tbody > tr.finished > td,  .finished{
+	background: #92D050;
+    font-weight: normal;
+}
+.table > tbody > tr.finished:hover > td,  .finished:hover{
+	background: #92D000;
+    font-weight: normal;
+}
+
+.table > tbody > tr.discarded > td, .discarded{
+	background-color: #ffc000;
+    font-weight: normal;
+}
+.table > tbody > tr.discarded:hover > td,  .discarded:hover{
+	background: #C8C800;
+    font-weight: normal;
+}
+
+.table > tbody > tr.urgent > td, .urgent{
+	background-color: #EE3B3B;
+    font-weight: normal;
+}
+.table > tbody > tr.urgent:hover > td,  .urgent:hover{
+	background: #EE0000;
+    font-weight: normal;
+}
+
+
+/*----------------------------end for custom theme----------------------------*/
