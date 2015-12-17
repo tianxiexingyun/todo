@@ -6,7 +6,6 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
-import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.Sqlite3Dialect;
 import com.jfinal.plugin.druid.DruidPlugin;
@@ -49,13 +48,8 @@ public class TodoConfig extends JFinalConfig {
 	/** 插件信息配置 */
 	@Override
 	public void configPlugin(Plugins me) {
-		String url = getProperty("jdbc.url");
-		if (!getPropertyToBoolean("jdbc.abs", false)) {
-			url = url.replace("appDir", PathKit.getWebRootPath());
-		}
 		// 添加数据源
-		DruidPlugin druidPlugin = new DruidPlugin(url, getProperty("jdbc.user"), getProperty("jdbc.pwd"));
-		druidPlugin.setDriverClass("org.sqlite.JDBC");
+		DruidPlugin druidPlugin = new DruidPlugin(getProperty("jdbc.url"), getProperty("jdbc.user"), getProperty("jdbc.pwd"));
 		me.add(druidPlugin);
 		// 添加数据源ActiveRecord支持
 		ActiveRecordPlugin arp = new ActiveRecordPlugin("todo", druidPlugin).setDialect(new Sqlite3Dialect());
