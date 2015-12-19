@@ -14,6 +14,7 @@
 		<jfinal.version>2.0</jfinal.version>
 		<jetty.version>8.1.8</jetty.version>
 		<druid.version>1.0.15</druid.version>
+		<sqlite.version>3.8.11.1</sqlite.version>
 		<logback.version>1.0.12</logback.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<jdk.version>1.7</jdk.version>
@@ -32,9 +33,9 @@
 			<version>${druid.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.38</version>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>${sqlite.version}</version>
 		</dependency>
 		<!-- end 数据库连接配置 -->
 		<!-- start 日志工具 -->

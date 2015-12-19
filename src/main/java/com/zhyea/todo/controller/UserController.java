@@ -4,7 +4,6 @@ import com.jfinal.plugin.activerecord.Page;
 import com.zhyea.todo.global.CustomController;
 import com.zhyea.todo.model.User;
 import com.zhyea.todo.service.UserService;
-import com.zhyea.todo.vo.BootstrapTableParams;
 import com.zhyea.todo.vo.JsonResponse;
 
 /**
@@ -29,8 +28,7 @@ public class UserController extends CustomController {
 	 * 编辑
 	 */
 	public void edit() {
-		Integer id = getParaToInt("id");
-		User user = service.get(id);
+		User user = service.get(getParaToInt("id"));
 		setAttr("user", user);
 		renderJsp("/user/user_edit.jsp");
 	}
@@ -60,10 +58,9 @@ public class UserController extends CustomController {
 	 * 列表数据
 	 */
 	public void data() {
-		BootstrapTableParams paras = getBootstrapTableParas();
 		String name = getPara("search");
 		name = (null == name ? "" : name);
-		Page<User> page = service.findInPage(paras, name);
+		Page<User> page = service.findInPage(getBootstrapTableParas(), name);
 		setAttr("total", page.getTotalRow());
 		setAttr("rows", page.getList());
 		renderJson();
@@ -73,13 +70,11 @@ public class UserController extends CustomController {
 	 * 删除记录
 	 */
 	public void delete() {
-		String ids = getPara("ids");
 		JsonResponse response = new JsonResponse("删除成功！");
-		if (!service.delete(ids)) {
+		if (!service.delete(getPara("ids"))) {
 			response.setSuccess(false);
 			response.setMsg("删除失败！");
 		}
 		renderJson(response);
 	}
-
 }

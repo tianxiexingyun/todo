@@ -6,7 +6,6 @@ import com.zhyea.todo.model.Items;
 import com.zhyea.todo.model.Items.Status;
 import com.zhyea.todo.service.CategoryService;
 import com.zhyea.todo.service.ItemsService;
-import com.zhyea.todo.vo.BootstrapTableParams;
 import com.zhyea.todo.vo.JsonResponse;
 
 /**
@@ -33,8 +32,7 @@ public class ItemsController extends CustomController {
 	 * 编辑
 	 */
 	public void edit() {
-		Integer id = getParaToInt(0);
-		Items items = service.get(id);
+		Items items = service.get(getParaToInt(0));
 		setAttr("items", items);
 		renderJsp("/items/items_edit.jsp");
 	}
@@ -68,8 +66,7 @@ public class ItemsController extends CustomController {
 	 * 编辑
 	 */
 	public void editInCat() {
-		Integer id = getParaToInt(0);
-		Items items = service.get(id);
+		Items items = service.get(getParaToInt(0));
 		setAttr("catName", catsService.getCat(items.getInt("category_id")));
 		setAttr("items", items);
 		renderJsp("/items/items_edit_in_cat.jsp");
@@ -96,12 +93,9 @@ public class ItemsController extends CustomController {
 	 * 分类列表数据
 	 */
 	public void dataInCat() {
-		BootstrapTableParams paras = getBootstrapTableParas();
 		String brief = getPara("search");
 		brief = (null == brief ? "" : brief);
-		Integer catId = getParaToInt("catId");
-		Integer userId = getUserIdInSession();
-		Page<Items> page = service.findItemsInPage(paras, brief, catId, userId);
+		Page<Items> page = service.findItemsInPage(getBootstrapTableParas(), brief, getParaToInt("catId"), getUserIdInSession());
 		setAttr("total", page.getTotalRow());
 		setAttr("rows", page.getList());
 		renderJson();
@@ -111,11 +105,9 @@ public class ItemsController extends CustomController {
 	 * 全部记录
 	 */
 	public void dataAll() {
-		BootstrapTableParams paras = getBootstrapTableParas();
 		String brief = getPara("search");
 		brief = (null == brief ? "" : brief);
-		Integer userId = getUserIdInSession();
-		Page<Items> page = service.findItemsInPage(paras, brief, userId);
+		Page<Items> page = service.findItemsInPage(getBootstrapTableParas(), brief, getUserIdInSession());
 		setAttr("total", page.getTotalRow());
 		setAttr("rows", page.getList());
 		renderJson();
@@ -125,9 +117,8 @@ public class ItemsController extends CustomController {
 	 * 删除记录
 	 */
 	public void delete() {
-		String ids = getPara("ids");
 		JsonResponse response = new JsonResponse("删除成功！");
-		if (!service.delete(ids)) {
+		if (!service.delete(getPara("ids"))) {
 			response.setSuccess(false);
 			response.setMsg("删除失败！");
 		}
@@ -138,9 +129,8 @@ public class ItemsController extends CustomController {
 	 * 标记已完成
 	 */
 	public void finish() {
-		String ids = getPara("ids");
 		JsonResponse response = new JsonResponse("处理成功！");
-		if (!service.updateStatus(ids, Status.FINISHED)) {
+		if (!service.updateStatus(getPara("ids"), Status.FINISHED)) {
 			response.setSuccess(false);
 			response.setMsg("处理失败！");
 		}
@@ -151,9 +141,8 @@ public class ItemsController extends CustomController {
 	 * 标记已丢弃
 	 */
 	public void discard() {
-		String ids = getPara("ids");
 		JsonResponse response = new JsonResponse("处理成功！");
-		if (!service.updateStatus(ids, Status.DISCARDED)) {
+		if (!service.updateStatus(getPara("ids"), Status.DISCARDED)) {
 			response.setSuccess(false);
 			response.setMsg("处理失败！");
 		}
@@ -161,12 +150,11 @@ public class ItemsController extends CustomController {
 	}
 
 	/**
-	 * 标记已丢弃
+	 * 恢复初始化
 	 */
 	public void recover() {
-		String ids = getPara("ids");
 		JsonResponse response = new JsonResponse("处理成功！");
-		if (!service.updateStatus(ids, Status.INIT)) {
+		if (!service.updateStatus(getPara("ids"), Status.INIT)) {
 			response.setSuccess(false);
 			response.setMsg("处理失败！");
 		}
@@ -174,17 +162,14 @@ public class ItemsController extends CustomController {
 	}
 
 	/**
-	 * 标记已丢弃
+	 * 标记事项等级
 	 */
 	public void setLevel() {
-		String ids = getPara("ids");
-		String level = getPara("level");
 		JsonResponse response = new JsonResponse("处理成功！");
-		if (!service.updateLevel(ids, level)) {
+		if (!service.updateLevel(getPara("ids"), getPara("level"))) {
 			response.setSuccess(false);
 			response.setMsg("处理失败！");
 		}
 		renderJson(response);
 	}
-
 }

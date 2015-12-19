@@ -5,7 +5,7 @@
 			<i class="icon-home home-icon"></i>
 			<a href="#">首页</a>
 		</li>
-		<li class="active">事项一览表</li>
+		<li class="active"><a href="#">事项一览表</a></li>
 	</ul>
 </div>
 <div class="main">

@@ -20,33 +20,34 @@
 				<i class="icon-dashboard"></i>  <span class="menu-text">控制台</span>
 			</a>
 		</li>
-		<li><a href="javascript:load('${ctx}/item/list')">
+		<li><a href="javascript:load('${ctx}/note/list')">
 				<i class="icon-edit"></i>
 				<span class="menu-text">记事本</span>
 			</a>
 		</li>
-		<li><a href="javascript:load('${ctx}/item/list')">
+		<li><a href="javascript:load('${ctx}/memory/list')">
 				<i class="icon-cloud"></i>
 				<span class="menu-text">备忘录</span>
 			</a>
 		</li>
-		<li><a href="#" class="nav-header collapsed" data-toggle="collapse" data-target="#others">
-				<i class="icon-qrcode"></i>
+		<li><a href="#" class="nav-header collapsed">
+				<i class="icon-road"></i>
 				<span class="menu-text">TODO</span>
 				<b class="arrow icon-angle-down"></b>
             </a>
-			<ul id="others" class="submenu nav-sidebar collapse">
-				<c:forEach items="${cats}" var="c" >
-					<li><a href="javascript:load('${ctx}/items/listInCat/${c.id}')">${c.name}</a></li>
+			<ul class="submenu nav-sidebar collapse">
+				<li><a href="javascript:load('${ctx}/items/all')">全部</a></li>
+				<c:forEach items="${cats}" var="c">
+					<li><a href="javascript:load('${ctx}/items/listInCat/${c.id}')"> ${c.name}</a></li>
 				</c:forEach>
 			</ul>
 		</li>
-        <li><a href="#" class="nav-header collapsed" data-toggle="collapse" data-target="#systemSetting">
+        <li><a href="#" class="nav-header collapsed">
         		<i class="icon-cog"></i>
         		<span class="menu-text">系统管理</span>
                 <b class="arrow icon-angle-down"></b>
             </a>
-            <ul id="systemSetting" class="submenu nav-sidebar collapse">
+            <ul class="submenu nav-sidebar collapse">
                 <li><a href="javascript:load('${ctx}/user/list')">用户管理</a></li>
 				<li><a href="javascript:load('${ctx}/cat/list')">分类信息</a></li>
             </ul>

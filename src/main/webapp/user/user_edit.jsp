@@ -5,9 +5,7 @@
 			<i class="icon-home home-icon"></i>
 			<a href="#">首页</a>
 		</li>
-		<li class="active">
-			<a href="javascript:load('${ctx}/user/list')">用户信息</a>
-		</li>
+		<li class="active"><a href="javascript:load('${ctx}/user/list')">用户列表</a></li>
 		<li class="active">编辑</li>
 	</ul>
 </div>

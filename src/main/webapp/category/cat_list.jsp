@@ -5,7 +5,7 @@
 			<i class="icon-home home-icon"></i>
 			<a href="#">首页</a>
 		</li>
-		<li class="active">分类信息列表</li>
+		<li class="active"><a href="#">分类信息列表</a></li>
 	</ul>
 </div>
 <div class="main">
@@ -24,7 +24,6 @@
 		   data-search = true
 		   data-pagination = true
 		   data-page-size = 10
-     	   data-row-style = "rowStyle"
      	   data-sort-name = "id"
      	   data-sort-order = "desc"
      	   data-smart-display = true
@@ -52,20 +51,11 @@ var $table = $('#categoryTable'),
 	selections = [];
 
 /**
- * 根据窗口大小调整表格高度
- */
-$(window).resize(function () {
-	$table.bootstrapTable('resetView', {
-	    height: getHeight()
-	});
-});
-
-/**
  * 操作 -> 编辑
  */
 function categoryOperateFormatter(value, row, index) {
     return [
-         '<button id="user_add" class="update btn btn-success btn-xs" title="编辑分类信息">',
+         '<button class="update btn btn-success btn-xs" title="编辑分类信息">',
          '<i class="glyphicon glyphicon-pencil"></i> 编辑',
          '</button>'
     ].join('');

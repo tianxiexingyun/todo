@@ -101,25 +101,25 @@ legend {
 	-moz-border-left-colors: none;
 }
 .nav-sidebar> li > a {
-	color: #999;
+	color: #EEE;
 	text-shadow: none !important;
 	font-size: 13px;
 }
 .nav-sidebar> li > a:visted {
 	background-color: #F33;
-	color: #CCC;
+	color: #EEE;
 }
 .nav-sidebar> li > a:hover {
 	background-color: #F33;
-	color: #CCC;
+	color: #EEE;
 }
 .nav-sidebar> li > a:active {
 	background-color: #F33;
-	color: #CCC;
+	color: #EEE;
 }
 .nav-sidebar> li > a:focus {
 	background-color: #F33;
-	color: #CCC;
+	color: #EEE;
 }
 .nav-sidebar> li > a > i {
 	font-size: 16px;
@@ -176,29 +176,33 @@ legend {
 .nav-sidebar > li > .submenu > li > a {
     display: block;
     position: relative;
-    color: #999;
-    padding: 7px 0px 9px 37px;
+    color: #EEE;
+    padding: 7px 0px 9px 32px;
     margin: 0px;
 }
 .nav-sidebar > li > .submenu > li > a:visited {
 	text-decoration: none;
 	background-color: #F33;
-    color: #CCC;
+    color: #EEE;
 }
 .nav-sidebar > li > .submenu > li > a:hover {
 	text-decoration: none;
 	background-color: #F33;
-    color: #CCC;
+    color: #EEE;
 }
 .nav-sidebar > li > .submenu > li > a:active {
 	text-decoration: none;
 	background-color: #F33;
-    color: #CCC;
+    color: #EEE;
 }
 .nav-sidebar > li > .submenu > li > a:focus {
 	text-decoration: none;
 	background-color: #F33;
-    color: #CCC;
+    color: #EEE;
+}
+.current {
+	background-color: #F33;
+	color: #EEE;
 }
 /*---------------------------end sidebar---------------------------*/
 
@@ -232,9 +236,10 @@ legend {
     position: relative;
     top: 2px;
 }
-.breadcrumb > li > a {
+.breadcrumb > li, .breadcrumb > li > a {
     display: inline-block;
-    padding: 0px 4px;
+    padding: 0px;
+    margin: 0px;
     color: #4C8FBD;
 }
 .table > thead, tfoot > tr {

@@ -15,18 +15,14 @@
 	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${ctx}/statics/css/font-awesome.min.css">
 	<link rel="stylesheet" href="${ctx}/statics/bstable/bootstrap-table.min.css">
+	<link rel="stylesheet" href="${ctx}/statics/jqueryconfirm/jquery-confirm.css">
 	
 	<link rel="stylesheet" href="${ctx}/statics/css/login.css">
 </head>
 <body>
-<c:if test="${null != response && !response.success}">
-	<div class="alert alert-danger">
-	   <a href="#" class="close" data-dismiss="alert"> &times; </a>
-	   <strong>警告！</strong>&nbsp;&nbsp;${response.msg}
-	</div>
-</c:if>
+
 <div class="contianer">
-<form class="form-signin" method="post" action="${ctx}/login">
+<form class="form-signin" method="post" action="${ctx}/check" onsubmit="return checkLogin(this);">
 		<div class="form-group">
 			<label class="col-md-3 control-label">用户名：</label> 
 			<div class="col-md-8 control-input">
@@ -52,10 +48,38 @@
 		</div>
 </form>
 </div>
+<script type="text/javascript">
+function checkLogin(form){
+	var $form = $(form);
+	$.ajax({
+		type : form.method || 'POST',
+		url : $form.attr("action"),
+		data : $form.serializeArray(),
+		dataType : "json",
+		cache : false,
+		success : function(data){
+						if(!data.success){
+								$.alert({
+								    title: '提示',
+								    content: data.msg,
+								    confirmButton: '确认',
+								    confirmButtonClass: 'btn-info',
+								    backgroundDismiss: false
+								});
+						}else{
+							window.location.href = "./";
+						}
+					}
+	});
+	return false;
+}
+</script>
+
 	<!-- Bootstrap core JavaScript  ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="${ctx}/statics/jqueryconfirm/jquery-confirm.js"></script>
 </body>
 </html>
 

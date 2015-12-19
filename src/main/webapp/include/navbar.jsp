@@ -17,7 +17,7 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><i class="glyphicon glyphicon-dashboard"></i> 控制台</a></li>
-				<li><a href="#"><i class="glyphicon glyphicon-cog"></i> 设置</a></li>
+				<li><a href="/logout"><i class="glyphicon glyphicon-off"></i> 退出</a></li>
 				<li><a href="#"><i class="glyphicon glyphicon-user"></i> 简介</a></li>
 				<li><a href="#"><i class="glyphicon glyphicon-phone-alt"></i> 帮助</a></li>
 			</ul>

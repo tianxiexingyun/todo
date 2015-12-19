@@ -6,16 +6,13 @@
 			<i class="icon-home home-icon"></i>
 			<a href="#">首页</a>
 		</li>
-		<li class="active">
-			<a href="javascript:load('${ctx}/items/all')">事项一览表</a>
-		</li>
-		<li class="active">新增</li>
+		<li class="active"><a href="javascript:load('${ctx}/items/all')">事项一览表</a></li>
+		<li class="active"><a href="#">新增</a></li>
 	</ul>
 </div>
 <div class="main">
 <div class="container panel panel-primary">
-<form class="form-horizontal" method="post" action="${ctx}/items/save" 
-	  onsubmit="return doSubmit(this, addItemsCallback);">
+<form class="form-horizontal" method="post" action="${ctx}/items/save" onsubmit="return doSubmit(this, addItemsCallback);">
 	<fieldset>
         <legend>新增待办事项</legend>
 		<div class="form-group">

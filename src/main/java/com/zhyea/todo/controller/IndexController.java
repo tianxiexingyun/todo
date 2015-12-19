@@ -39,24 +39,7 @@ public class IndexController extends CustomController {
 	 */
 	@Clear
 	public void login() {
-		if (null != getUserInSession()) {
-			redirect("/");
-			return;
-		}
-		String username = getPara("username");
-		String password = getPara("password");
-		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-			renderJsp("./main/login.jsp");
-			return;
-		}
-		User user = userService.checkLogin(username, password);
-		if (null != user) {
-			setSessionAttr(Constants.USER_IN_SESSION, user);
-			redirect("/");
-		} else {
-			setAttr("response", new JsonResponse(false, "登录信息错误，请重试！"));
-			renderJsp("./main/login.jsp");
-		}
+		renderJsp("./main/login.jsp");
 	}
 
 	/**
@@ -66,9 +49,27 @@ public class IndexController extends CustomController {
 	public void check() {
 		JsonResponse response = new JsonResponse("用户已登录！");
 		if (null == getUserInSession()) {
+			String username = getPara("username");
+			String password = getPara("password");
+			if (!StringUtils.isBlank(username) && !StringUtils.isBlank(password)) {
+				User user = userService.checkLogin(username, password);
+				if (null != user) {
+					setSessionAttr(Constants.USER_IN_SESSION, user);
+					renderJson(response);
+					return;
+				}
+			}
 			response.setSuccess(false);
 			response.setMsg("用户登录信息不存在！");
 		}
 		renderJson(response);
+	}
+
+	/**
+	 * 登出系统
+	 */
+	public void logout() {
+		getSession().removeAttribute(Constants.USER_IN_SESSION);
+		redirect("/login");
 	}
 }

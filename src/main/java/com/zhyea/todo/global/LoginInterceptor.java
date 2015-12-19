@@ -19,7 +19,7 @@ public class LoginInterceptor implements Interceptor {
 		Controller c = inv.getController();
 		if (Constants.devMode) {
 			System.out.println("------the remote address is : " + c.getRequest().getRemoteAddr());
-			System.out.println("");
+			System.out.println("" + c.getRequest().getRequestURI());
 		}
 
 		User user = c.getSessionAttr(Constants.USER_IN_SESSION);

@@ -33,17 +33,11 @@ public class UserService {
 	}
 
 	/**
-	 * 分页偏移量
-	 * @param offset
-	 * 			查询开始偏移量
-	 * @param limit
-	 * 			页面长度
-	 * @param sort
-	 * 			排序字段
-	 * @param direct
-	 * 			排序方向
+	 * 分页查询用户信息
+	 * @param paras
+	 * 			bootstrap参数
 	 * @param name
-	 * 			查询的分类记录名称
+	 * 			要查询的用户名
 	 * @return
 	 */
 	public Page<User> findInPage(BootstrapTableParams paras, String name) {

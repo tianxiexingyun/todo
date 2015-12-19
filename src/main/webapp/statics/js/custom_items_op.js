@@ -10,15 +10,6 @@ var $table = $('#itemsTable'),
 	selections = [];
 
 /**
- * 根据窗口大小调整表格高度
- */
-$(window).resize(function () {
-	$table.bootstrapTable('resetView', {
-	    height: getHeight()
-	});
-});
-
-/**
  * 操作
  */
 function itemsOperateFormatter(value, row, index) {
@@ -48,7 +39,7 @@ function updateBtnState(){
  * 设置触发事件
  */
 $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', 
-		function () {
+		function() {
 			updateBtnState();
 			selections = getSelections($table);
 		});
@@ -56,19 +47,19 @@ $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.tab
 /**
  * 点击删除按钮
  */
-$btnDelete.click(function () {bootstrapTableDelete($table, contextUrl + "/items/delete?ids="+selections);});
+$btnDelete.click(function(){bootstrapTableDelete($table, contextUrl + "/items/delete?ids="+selections);});
 /**
  * 点击已处理按钮
  */
-$btnFinished.click(function () {bootstrapTablePost($table, contextUrl + "/items/finish?ids="+selections);});
+$btnFinished.click(function(){bootstrapTablePost($table, contextUrl + "/items/finish?ids="+selections);});
 /**
  * 点击已放弃按钮
  */
-$btnDiscarded.click(function () {bootstrapTablePost($table, contextUrl + "/items/discard?ids="+selections);});
+$btnDiscarded.click(function(){bootstrapTablePost($table, contextUrl + "/items/discard?ids="+selections);});
 /**
  * 点击初始化按钮
  */
-$btnRecover.click(function () {bootstrapTablePost($table, contextUrl + "/items/recover?ids="+selections);});
+$btnRecover.click(function(){bootstrapTablePost($table, contextUrl + "/items/recover?ids="+selections);});
 
 /**
  * 设置事项紧急级别

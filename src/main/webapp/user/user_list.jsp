@@ -5,7 +5,7 @@
 			<i class="icon-home home-icon"></i>
 			<a href="#">首页</a>
 		</li>
-		<li class="active">用户列表</li>
+		<li class="active"><a href="#">用户列表</a></li>
 	</ul>
 </div>
 <div class="main">
@@ -24,7 +24,6 @@
 		   data-search = true
 		   data-pagination = true
 		   data-page-size = 10
-     	   data-row-style = "rowStyle"
      	   data-sort-name = "id"
      	   data-sort-order = "desc"
      	   data-smart-display = true
@@ -50,15 +49,6 @@
 var $table = $('#userTable'),
 	$btnDelete = $('#btnDelete'),
 	selections = [];
-
-/**
- * 根据窗口大小调整表格高度
- */
-$(window).resize(function () {
-	$table.bootstrapTable('resetView', {
-	    height: getHeight()
-	});
-});
 
 /**
  * 操作
@@ -97,7 +87,6 @@ $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.tab
  * 点击删除按钮
  */
 $btnDelete.click(function () {bootstrapTableDelete($table, "${ctx}/user/delete?ids="+selections);});
-
 
 $table.bootstrapTable({});
 </script>

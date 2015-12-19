@@ -27,17 +27,13 @@ public class CategoryService {
 	private static final String sqlSelect = "select id, name, name_en, remark, deleted ";
 
 	/**
-	 * 分页偏移量
-	 * @param offset
-	 * 			查询开始偏移量
-	 * @param limit
-	 * 			页面长度
-	 * @param sort
-	 * 			排序字段
-	 * @param direct
-	 * 			排序方向
+	 * 分页查询分类信息
+	 * @param paras
+	 * 			bootstrap查询参数
+	 * @param userId
+	 * 			用户ID信息
 	 * @param name
-	 * 			查询的分类记录名称
+	 * 			分类名称
 	 * @return
 	 */
 	public Page<Category> findInPage(BootstrapTableParams paras, int userId, String name) {

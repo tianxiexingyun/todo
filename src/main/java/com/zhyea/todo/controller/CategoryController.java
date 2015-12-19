@@ -4,7 +4,6 @@ import com.jfinal.plugin.activerecord.Page;
 import com.zhyea.todo.global.CustomController;
 import com.zhyea.todo.model.Category;
 import com.zhyea.todo.service.CategoryService;
-import com.zhyea.todo.vo.BootstrapTableParams;
 import com.zhyea.todo.vo.JsonResponse;
 
 /**
@@ -29,8 +28,7 @@ public class CategoryController extends CustomController {
 	 * 编辑分类信息
 	 */
 	public void edit() {
-		Integer id = getParaToInt("id");
-		Category cat = service.get(id);
+		Category cat = service.get(getParaToInt("id"));
 		setAttr("cat", cat);
 		renderJsp("/category/cat_edit.jsp");
 	}
@@ -60,10 +58,9 @@ public class CategoryController extends CustomController {
 	 * 分类信息列表数据
 	 */
 	public void data() {
-		BootstrapTableParams paras = getBootstrapTableParas();
 		String name = getPara("search");
 		name = (null == name ? "" : name);
-		Page<Category> page = service.findInPage(paras, getUserIdInSession(), name);
+		Page<Category> page = service.findInPage(getBootstrapTableParas(), getUserIdInSession(), name);
 		setAttr("total", page.getTotalRow());
 		setAttr("rows", page.getList());
 		renderJson();
@@ -73,9 +70,8 @@ public class CategoryController extends CustomController {
 	 * 删除分类信息
 	 */
 	public void delete() {
-		String ids = getPara("ids");
 		JsonResponse response = new JsonResponse("删除成功！");
-		if (!service.delete(ids)) {
+		if (!service.delete(getPara("ids"))) {
 			response.setSuccess(false);
 			response.setMsg("删除失败！");
 		}
