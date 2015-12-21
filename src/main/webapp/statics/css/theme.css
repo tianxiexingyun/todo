@@ -26,8 +26,9 @@ legend {
 	background-color: #F33;
 }
 
-.navbar-header .navbar-brand {
-	font-weight: bold;
+.navbar-brand {
+	font-weight: normal;
+	color: #FFF
 }
 /*---------------------------end navbar---------------------------*/
 

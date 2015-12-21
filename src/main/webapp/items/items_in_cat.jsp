@@ -63,7 +63,7 @@
 				<th data-sortable=true data-field="status" data-width="81px" data-align="center">状态</th>
 				<th data-sortable=true data-field="detail" data-visible=false>详情</th>
 				<th data-sortable=true data-valign="middle" data-width="100px"  data-align="center" 
-									   data-formatter=itemsOperateFormatter data-events=itemsOperateEvents>操作</th>
+									   data-formatter=itemsInCatOperateFormatter data-events=itemsInCatOperateEvents>操作</th>
 			</tr>
 		</thead>
 	</table>

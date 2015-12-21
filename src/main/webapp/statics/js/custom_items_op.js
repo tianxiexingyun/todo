@@ -22,6 +22,19 @@ window.itemsOperateEvents = {
         load(contextUrl + '/items/edit/'+row.id);
     }
 };
+/**
+ * 分类操作
+ */
+function itemsInCatOperateFormatter(value, row, index) {
+	return ['<button class="update btn btn-success btn-xs" title="编辑事项信息">',
+		    '<i class="glyphicon glyphicon-pencil"></i> 编辑',
+		    '</button>'].join('');
+}
+window.itemsInCatOperateEvents = {
+    'click .update': function (e, value, row, index) {
+        load(contextUrl + '/items/editInCat/'+row.id);
+    }
+};
 
 /**
  * 更新安装disabled状态

@@ -11,15 +11,15 @@
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="${ctx}/"><i class="glyphicon glyphicon-leaf"></i>&nbsp;&nbsp;TODO LIST</a>
+			<a class="navbar-brand" href="${ctx}/"><i class="glyphicon glyphicon-th-list"></i>&nbsp;&nbsp;TODO LIST</a>
 		</div>
 		
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><i class="glyphicon glyphicon-dashboard"></i> 控制台</a></li>
-				<li><a href="/logout"><i class="glyphicon glyphicon-off"></i> 退出</a></li>
 				<li><a href="#"><i class="glyphicon glyphicon-user"></i> 简介</a></li>
 				<li><a href="#"><i class="glyphicon glyphicon-phone-alt"></i> 帮助</a></li>
+				<li><a href="/logout"><i class="glyphicon glyphicon-off"></i> 退出</a></li>
 			</ul>
 		</div>
 	</div>
