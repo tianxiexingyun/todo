@@ -43,7 +43,6 @@
 </form>
 </div>
 </div>
-<script src="${ctx}/statics/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 CKEDITOR.replace( 'noteEditor' );
 function addCatCallback(data){

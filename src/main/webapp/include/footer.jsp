@@ -12,5 +12,7 @@
 	<script src="${ctx}/statics/bsdatetime/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 	<script src="${ctx}/statics/jqueryconfirm/jquery-confirm.js"></script>
 	<script src="${ctx}/statics/js/custom.js"></script>
+	<script src="${ctx}/statics/js/custom_items_op.js"></script>
+	<script src="${ctx}/statics/ckeditor/ckeditor.js"></script>
 </body>
 </html>

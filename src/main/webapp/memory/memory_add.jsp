@@ -43,7 +43,6 @@
 </form>
 </div>
 </div>
-<script src="${ctx}/statics/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 function addCatCallback(data){
 	alertAndRedirect(data, '${ctx}/memory/list');
