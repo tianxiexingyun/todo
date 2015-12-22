@@ -1,6 +1,10 @@
 package com.zhyea.todo.controller;
 
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.ehcache.CacheInterceptor;
+import com.jfinal.plugin.ehcache.CacheName;
+import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.zhyea.todo.global.CustomController;
 import com.zhyea.todo.model.Items;
 import com.zhyea.todo.model.Items.Status;
@@ -24,6 +28,7 @@ public class ItemsController extends CustomController {
 	/**
 	 * 新增
 	 */
+	@Before(CacheInterceptor.class)
 	public void add() {
 		renderJsp("/items/items_add.jsp");
 	}
@@ -40,6 +45,8 @@ public class ItemsController extends CustomController {
 	/**
 	 * 保存记录
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("itemsAllCache")
 	public void save() {
 		Items item = getModel(Items.class, "items");
 		setUserIdInModel(item);
@@ -92,6 +99,8 @@ public class ItemsController extends CustomController {
 	/**
 	 * 分类列表数据
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("itemsAllCache")
 	public void dataInCat() {
 		String brief = getPara("search");
 		brief = (null == brief ? "" : brief);
@@ -104,6 +113,8 @@ public class ItemsController extends CustomController {
 	/**
 	 * 全部记录
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("itemsAllCache")
 	public void dataAll() {
 		String brief = getPara("search");
 		brief = (null == brief ? "" : brief);
@@ -116,6 +127,8 @@ public class ItemsController extends CustomController {
 	/**
 	 * 删除记录
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("itemsAllCache")
 	public void delete() {
 		JsonResponse response = new JsonResponse("删除成功！");
 		if (!service.delete(getPara("ids"))) {
@@ -128,6 +141,8 @@ public class ItemsController extends CustomController {
 	/**
 	 * 标记已完成
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("itemsAllCache")
 	public void finish() {
 		JsonResponse response = new JsonResponse("处理成功！");
 		if (!service.updateStatus(getPara("ids"), Status.FINISHED)) {
@@ -140,6 +155,8 @@ public class ItemsController extends CustomController {
 	/**
 	 * 标记已丢弃
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("itemsAllCache")
 	public void discard() {
 		JsonResponse response = new JsonResponse("处理成功！");
 		if (!service.updateStatus(getPara("ids"), Status.DISCARDED)) {
@@ -152,6 +169,8 @@ public class ItemsController extends CustomController {
 	/**
 	 * 恢复初始化
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("itemsAllCache")
 	public void recover() {
 		JsonResponse response = new JsonResponse("处理成功！");
 		if (!service.updateStatus(getPara("ids"), Status.INIT)) {
@@ -164,6 +183,8 @@ public class ItemsController extends CustomController {
 	/**
 	 * 标记事项等级
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("itemsAllCache")
 	public void setLevel() {
 		JsonResponse response = new JsonResponse("处理成功！");
 		if (!service.updateLevel(getPara("ids"), getPara("level"))) {

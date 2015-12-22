@@ -10,6 +10,7 @@ import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.Sqlite3Dialect;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.zhyea.todo.controller.CategoryController;
 import com.zhyea.todo.controller.IndexController;
@@ -73,6 +74,9 @@ public class TodoConfig extends JFinalConfig {
 		arp.addMapping("dt_items", Items.class);
 		arp.addMapping("dt_note", Note.class);
 		arp.addMapping("dt_memory", Memory.class);
+
+		/*-------------------------------缓存-------------------------------*/
+		me.add(new EhCachePlugin());
 	}
 
 	/** 拦截器配置 */

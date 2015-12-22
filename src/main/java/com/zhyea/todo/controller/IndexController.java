@@ -2,7 +2,9 @@ package com.zhyea.todo.controller;
 
 import java.util.List;
 
+import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
+import com.jfinal.plugin.ehcache.CacheInterceptor;
 import com.zhyea.todo.constant.Constants;
 import com.zhyea.todo.global.CustomController;
 import com.zhyea.todo.model.Category;
@@ -28,6 +30,7 @@ public class IndexController extends CustomController {
 	/**
 	 * 首页
 	 */
+	@Before(CacheInterceptor.class)
 	public void index() {
 		List<Category> list = catService.findAll(getUserIdInSession());
 		setAttr("cats", list);

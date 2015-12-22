@@ -1,6 +1,10 @@
 package com.zhyea.todo.controller;
 
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.ehcache.CacheInterceptor;
+import com.jfinal.plugin.ehcache.CacheName;
+import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.zhyea.todo.global.CustomController;
 import com.zhyea.todo.model.Note;
 import com.zhyea.todo.service.NoteService;
@@ -36,6 +40,8 @@ public class NoteController extends CustomController {
 	/**
 	 * 保存记录
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("noteCache")
 	public void save() {
 		Note note = getModel(Note.class, "note");
 		setUserIdInModel(note);
@@ -57,6 +63,8 @@ public class NoteController extends CustomController {
 	/**
 	 * 列表数据
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("noteCache")
 	public void data() {
 		String search = (null == getPara("search") ? "" : getPara("search"));
 		Page<Note> page = service.findInPage(getBootstrapTableParas(), getUserIdInSession(), search);
@@ -68,6 +76,8 @@ public class NoteController extends CustomController {
 	/**
 	 * 删除记录
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("noteCache")
 	public void delete() {
 		JsonResponse response = new JsonResponse("删除成功！");
 		if (!service.delete(getPara("ids"))) {

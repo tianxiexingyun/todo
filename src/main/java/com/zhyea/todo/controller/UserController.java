@@ -1,6 +1,10 @@
 package com.zhyea.todo.controller;
 
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.ehcache.CacheInterceptor;
+import com.jfinal.plugin.ehcache.CacheName;
+import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.zhyea.todo.global.CustomController;
 import com.zhyea.todo.model.User;
 import com.zhyea.todo.service.UserService;
@@ -36,6 +40,8 @@ public class UserController extends CustomController {
 	/**
 	 * 保存用户信息
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("userCache")
 	public void save() {
 		User user = getModel(User.class, "user");
 		user.set("update_user_id", getUserIdInSession());
@@ -57,6 +63,8 @@ public class UserController extends CustomController {
 	/**
 	 * 列表数据
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("userCache")
 	public void data() {
 		String name = getPara("search");
 		name = (null == name ? "" : name);
@@ -69,6 +77,8 @@ public class UserController extends CustomController {
 	/**
 	 * 删除记录
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("userCache")
 	public void delete() {
 		JsonResponse response = new JsonResponse("删除成功！");
 		if (!service.delete(getPara("ids"))) {

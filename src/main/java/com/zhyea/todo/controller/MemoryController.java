@@ -1,6 +1,10 @@
 package com.zhyea.todo.controller;
 
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.ehcache.CacheInterceptor;
+import com.jfinal.plugin.ehcache.CacheName;
+import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.zhyea.todo.global.CustomController;
 import com.zhyea.todo.model.Memory;
 import com.zhyea.todo.service.MemoryService;
@@ -36,6 +40,8 @@ public class MemoryController extends CustomController {
 	/**
 	 * 保存记录
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("memoryCache")
 	public void save() {
 		Memory memory = getModel(Memory.class, "memory");
 		setUserIdInModel(memory);
@@ -57,6 +63,8 @@ public class MemoryController extends CustomController {
 	/**
 	 * 列表数据
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("memoryCache")
 	public void data() {
 		String search = (null == getPara("search") ? "" : getPara("search"));
 		Page<Memory> page = service.findInPage(getBootstrapTableParas(), getUserIdInSession(), search);
@@ -68,6 +76,8 @@ public class MemoryController extends CustomController {
 	/**
 	 * 删除记录
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("memoryCache")
 	public void delete() {
 		JsonResponse response = new JsonResponse("删除成功！");
 		if (!service.delete(getPara("ids"))) {
@@ -80,6 +90,8 @@ public class MemoryController extends CustomController {
 	/**
 	 * 标记已完成
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("memoryCache")
 	public void dealed() {
 		JsonResponse response = new JsonResponse("处理成功！");
 		if (!service.dealed(getPara("ids"))) {
