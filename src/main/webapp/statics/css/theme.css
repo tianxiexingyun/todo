@@ -8,6 +8,14 @@ button, table, input, select, textarea {
 legend {
 	padding-top: 18px;
 }
+a {
+	color: #333;
+}
+a:hover {
+	color: #000;
+	text-decoration: none;
+	
+}
 /*--------------------------begin navbar--------------------------*/
 .navbar {
 	background-color: #000;
@@ -28,7 +36,7 @@ legend {
 
 .navbar-brand {
 	font-weight: normal;
-	color: #FFF
+	color: #F33
 }
 /*---------------------------end navbar---------------------------*/
 

@@ -36,7 +36,7 @@
 			<tr>
 				<th data-checkbox=true data-valign="middle" data-width="48px"  data-field="deleted">&nbsp;</th>
 				<th data-sortable=true data-valign="middle" data-width="72px"  data-field="id" data-align="left">ID</th>
-				<th data-sortable=true data-valign="left"   data-field="brief">标题</th>
+				<th data-sortable=true data-valign="left"   data-field="brief" data-formatter=noteBriefFormatter>标题</th>
 				<th data-sortable=true data-valign="middle" data-width="180px"  data-align="center" 
 									   data-formatter=noteOperateFormatter data-events=noteOperateEvents>操作</th>
 			</tr>
@@ -63,6 +63,16 @@ window.noteOperateEvents = {
 	        load('${ctx}/note/edit/'+row.id);
 	    }
 	};
+/**
+ * 标题
+ */
+function noteBriefFormatter(value, row, index) {
+    return [
+            '<a href="javascript:load(\'${ctx}/note/edit/'+row.id+'\')">',
+            value,
+            '</a>'
+       ].join('');
+   }
 
 /**
  * 更新安装disabled状态
