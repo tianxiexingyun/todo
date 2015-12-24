@@ -1,3 +1,7 @@
+-- 删除备忘录
+drop table if exists dt_memory;
+-- 删除记事本
+drop table if exists dt_note;
 -- 删除待办事项表
 drop table if exists dt_items;
 -- 删除自定义类别表
@@ -61,6 +65,35 @@ create table dt_items(
 	level varchar(8) default 'B', -- 紧急程度
 	status varchar(16), -- 记录处理状态
 
+	deleted smallint default 0, -- 是否已删除
+	update_user_id integer, -- 最近更新用户ID
+	create_time varchar(32), -- 创建时间
+	update_time varchar(32) -- 更新时间
+)ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+-- 记事本
+create table dt_note(
+	id integer primary key autoincrement,
+	user_id integer, -- 用户ID
+	brief varchar(128), -- 简述
+	content varchar(2048), -- 内容
+	
+	deleted smallint default 0, -- 是否已删除
+	update_user_id integer, -- 最近更新用户ID
+	create_time varchar(32), -- 创建时间
+	update_time varchar(32) -- 更新时间
+)ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+-- 备忘录
+create table dt_memory(
+	id integer primary key autoincrement,
+	user_id integer, -- 用户ID
+	brief varchar(128), -- 简述
+	content varchar(2048), -- 内容
+	status varchar(16), -- 状态
+	
 	deleted smallint default 0, -- 是否已删除
 	update_user_id integer, -- 最近更新用户ID
 	create_time varchar(32), -- 创建时间

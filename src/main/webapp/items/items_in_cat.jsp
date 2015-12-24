@@ -53,16 +53,16 @@
 		   data-url="${ctx}/items/dataInCat">
 		<thead>
 			<tr>
-				<th data-checkbox=true data-field="deleted" data-width="48px">&nbsp;</th>
-				<th data-sortable=true data-field="id" data-width="72px" data-align="left">ID</th>
-				<th data-sortable=true data-field="category_id" data-width="81px" data-visible=false data-align="center">分类</th>
-				<th data-sortable=false data-field="brief">事项</th>
-				<th data-sortable=true data-field="expected_time" data-width="160px" data-align="center">预计完成时间</th>
-				<th data-sortable=true data-field="complete_time" data-width="160px" data-visible=false data-align="center">实际完成时间</th>
-				<th data-sortable=true data-field="level" data-width="81px" data-align="center">级别</th>
-				<th data-sortable=true data-field="status" data-width="81px" data-align="center">状态</th>
-				<th data-sortable=true data-field="detail" data-visible=false>详情</th>
-				<th data-sortable=true data-valign="middle" data-width="100px"  data-align="center" 
+				<th data-checkbox=true data-valign="middle" data-field="deleted" data-width="48px">&nbsp;</th>
+				<th data-sortable=true data-valign="middle" data-align="left" data-field="id" data-width="72px">ID</th>
+				<th data-sortable=true data-valign="middle" data-align="center" data-field="category_id" data-width="81px" data-visible=false>分类</th>
+				<th data-sortable=false data-valign="middle" data-field="brief">事项</th>
+				<th data-sortable=true data-valign="middle" data-align="center" data-field="expected_time" data-width="160px">预计完成时间</th>
+				<th data-sortable=true data-valign="middle" data-align="center" data-field="complete_time" data-width="160px" data-visible=false>实际完成时间</th>
+				<th data-sortable=true data-valign="middle" data-align="center" data-field="level" data-width="81px">级别</th>
+				<th data-sortable=true data-valign="middle" data-align="center" data-field="status" data-width="81px">状态</th>
+				<th data-sortable=true data-valign="middle" data-field="detail" data-visible=false>详情</th>
+				<th data-sortable=true data-valign="middle" data-align="center" data-width="100px" 
 									   data-formatter=itemsInCatOperateFormatter data-events=itemsInCatOperateEvents>操作</th>
 			</tr>
 		</thead>

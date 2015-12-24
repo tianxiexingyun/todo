@@ -21,35 +21,35 @@
     overflowToDisk：内存不足时，是否启用磁盘缓存。          
     memoryStoreEvictionPolicy：缓存满了之后的淘汰算法。      
     -->       
-    <cache name="noteCache"           
-	   	   	maxElementsInMemory="10000"           
-	    	eternal="false"          
-	    	overflowToDisk="false"           
-	    	timeToIdleSeconds="0"           
-	    	timeToLiveSeconds="86400"          
-	    	memoryStoreEvictionPolicy="LFU" />  
-	    	
-    <cache name="memoryCache"           
-	   	   	maxElementsInMemory="10000"           
-	    	eternal="false"          
-	    	overflowToDisk="false"           
-	    	timeToIdleSeconds="0"           
-	    	timeToLiveSeconds="86400"          
-	    	memoryStoreEvictionPolicy="LFU" />
-	    	
-    <cache name="itemsAllCache"           
-	   	   	maxElementsInMemory="10000"           
-	    	eternal="false"          
-	    	overflowToDisk="false"           
-	    	timeToIdleSeconds="0"           
-	    	timeToLiveSeconds="86400"          
-	    	memoryStoreEvictionPolicy="LFU" />
-	    	
-    <cache name="userCache"           
-	   	   	maxElementsInMemory="10000"           
+    <cache name="noteCache"
+	   	   	maxElementsInMemory="10000"
 	    	eternal="false"
 	    	overflowToDisk="false"
-	    	timeToIdleSeconds="600" 
-	    	timeToLiveSeconds="86400"          
+	    	timeToIdleSeconds="0"
+	    	timeToLiveSeconds="86400"
+	    	memoryStoreEvictionPolicy="LFU" />  
+	    	
+    <cache name="memoryCache"
+	   	   	maxElementsInMemory="10000"
+	    	eternal="false"
+	    	overflowToDisk="false"
+	    	timeToIdleSeconds="0"
+	    	timeToLiveSeconds="86400"
+	    	memoryStoreEvictionPolicy="LFU" />
+	    	
+    <cache name="itemsAllCache"
+	   	   	maxElementsInMemory="10000"
+	    	eternal="false"
+	    	overflowToDisk="false"
+	    	timeToIdleSeconds="0"
+	    	timeToLiveSeconds="86400"
+	    	memoryStoreEvictionPolicy="LFU" />
+	    	
+    <cache name="userCache"
+	   	   	maxElementsInMemory="10000"
+	    	eternal="false"
+	    	overflowToDisk="false"
+	    	timeToIdleSeconds="600"
+	    	timeToLiveSeconds="86400"
 	    	memoryStoreEvictionPolicy="LFU" />
 </ehcache>

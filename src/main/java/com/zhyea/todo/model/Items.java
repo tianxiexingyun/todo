@@ -36,7 +36,6 @@ public class Items extends CustomModel<Items> {
 		Level(String _desc) {
 			this.desc = _desc;
 		}
-
 	}
 
 	@Override

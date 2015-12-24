@@ -75,4 +75,11 @@ public class IndexController extends CustomController {
 		getSession().removeAttribute(Constants.USER_IN_SESSION);
 		redirect("/login");
 	}
+
+	/**
+	 * 控制台
+	 */
+	public void console() {
+		renderJsp("./main/console.jsp");
+	}
 }

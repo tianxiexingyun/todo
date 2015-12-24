@@ -38,7 +38,7 @@
 			<tr>
 				<th data-checkbox=true data-valign="middle" data-width="48px"  data-field="status">&nbsp;</th>
 				<th data-sortable=true data-valign="middle" data-width="72px"  data-field="id" data-align="left">ID</th>
-				<th data-sortable=true data-valign="left"   data-field="brief" data-formatter=memoryBriefFormatter>标题</th>
+				<th data-sortable=true data-valign="middle" data-field="brief" data-formatter=memoryBriefFormatter>标题</th>
 				<th data-sortable=true data-valign="middle" data-width="180px"  data-align="center" 
 									   data-formatter=memoryOperateFormatter data-events=memoryOperateEvents>操作</th>
 			</tr>

@@ -7,9 +7,10 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.zhyea.todo.model.Items;
 import com.zhyea.todo.model.Items.Status;
-import com.zhyea.todo.utils.DateUtils;
+import com.zhyea.todo.utils.DateKit;
 import com.zhyea.todo.utils.StringUtils;
 import com.zhyea.todo.vo.BootstrapTableParams;
+import com.zhyea.todo.vo.ItemsStaticVO;
 
 /**
  * @ClassName: ItemService 
@@ -34,6 +35,12 @@ public class ItemsService {
 	private static final String sqlBatchFinish = "update dt_items set status=?, complete_time=? where id in (?1)";
 	/** 批量更新级别 */
 	private static final String sqlBatchUpdateLevel = "update dt_items set level=? where id in (?1)";
+	/** 预计完成时间格式 */
+	private static final String EXPECTED_TIME_FORMAT = "yyyy-MM-dd HH:mm";
+
+	enum Duration {
+		DATE, WEEK, MONTH, YEAR
+	}
 
 	/**
 	 * 按条件查询分类记录
@@ -50,8 +57,18 @@ public class ItemsService {
 	}
 
 	/**
+	 * 按时间查询记录
+	 * @param duration
+	 * 			查询时间周期
+	 */
+	public List<Items> findItems(String duration) {
+		return null;
+	}
+
+	/**
 	 * 获取单条记录
 	 * @param id
+	 * 			记录ID
 	 * @return
 	 */
 	public Items get(Integer id) {
@@ -88,7 +105,7 @@ public class ItemsService {
 	 */
 	public boolean updateStatus(String ids, Status status) {
 		if (status == Status.FINISHED) {
-			return Db.update(sqlBatchFinish.replace("?1", ids), status, DateUtils.format(new Date())) > 0;
+			return Db.update(sqlBatchFinish.replace("?1", ids), status, DateKit.format(new Date())) > 0;
 		} else {
 			return Db.update(sqlBatchUpdateStatus.replace("?1", ids), status) > 0;
 		}
@@ -117,9 +134,8 @@ public class ItemsService {
 
 	/**
 	 * 更新某些必要的字段
-	 * @param list
 	 */
-	private void updateRequiredColumns(List<Items> list) {
+	private List<Items> updateRequiredColumns(List<Items> list) {
 		for (Items tmp : list) {
 			String statusStr = tmp.get("status");
 			if (!StringUtils.isBlank(statusStr)) {
@@ -128,6 +144,55 @@ public class ItemsService {
 			}
 			tmp.set("category_id", catsService.getCat(tmp.getInt("category_id")));
 		}
+		return list;
 	}
 
+	/**
+	 * 记录统计
+	 * @param userId  用户ID
+	 * @param duration  持续时间
+	 */
+	public ItemsStaticVO statistics(int userId, String duration) {
+		String startTime;
+		Duration d = Duration.valueOf(duration);
+		switch (d) {
+		case WEEK:
+			startTime = DateKit.format(DateKit.getThisMonday(), DateKit.FORMAT_DATE_TIME_START);
+		case MONTH:
+			startTime = DateKit.format(DateKit.getMonthFirstDay(), DateKit.FORMAT_DATE_TIME_START);
+		case YEAR:
+			startTime = DateKit.format(DateKit.getYearFirstDay(), DateKit.FORMAT_DATE_TIME_START);
+		default:
+			startTime = DateKit.format(new Date(), DateKit.FORMAT_DATE_TIME_START);
+		}
+		return statistics(updateRequiredColumns(dao.find(sqlSelect + " from dt_items where deleted=0 and user_id=? and create_time>?", userId, startTime)));
+	}
+
+	/**
+	 * 执行统计
+	 * @param list
+	 * 			查询记录总数
+	 */
+	private ItemsStaticVO statistics(List<Items> list) {
+		updateRequiredColumns(list);
+		ItemsStaticVO vo = new ItemsStaticVO();
+		vo.setItemsNum(list.size());
+		Date expectedTime = null;
+		Date completeTime = null;
+		for (Items item : list) {
+			expectedTime = DateKit.parse(item.getStr("expected_time"), EXPECTED_TIME_FORMAT);
+			completeTime = DateKit.parse(item.getStr("complete_time"));
+			if (null == completeTime) {//结束日期为空，表示未完成
+				vo.addUnfinished(item);
+				if (DateKit.compareTo(expectedTime, new Date()) < 0) {//结束日期为空，且预期日期小于当前日期，已过期
+					vo.addTimeout(item);
+				}
+			} else if (DateKit.compareTo(expectedTime, completeTime) < 0) {//预期日期小于结束日期，已过期
+				vo.addTimeout(item);
+			}
+			vo.addItemInCats(item.getStr("category_id"));
+			vo.addItemInDays(DateKit.format(DateKit.parse(item.getStr("complete_time")), DateKit.FORMAT_DATE_ONLY));
+		}
+		return vo;
+	}
 }

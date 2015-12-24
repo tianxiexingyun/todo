@@ -16,7 +16,7 @@
 	</div>
 
 	<ul class="nav nav-sidebar">
-		<li><a href="javascript:load('${ctx}/items/all')">
+		<li><a href="javascript:load('${ctx}/console')">
 				<i class="icon-dashboard"></i>  <span class="menu-text">控制台</span>
 			</a>
 		</li>
@@ -36,10 +36,10 @@
 				<b class="arrow icon-angle-down"></b>
             </a>
 			<ul class="submenu nav-sidebar collapse">
-				<li><a href="javascript:load('${ctx}/items/all')">全部</a></li>
 				<c:forEach items="${cats}" var="c">
 					<li><a href="javascript:load('${ctx}/items/listInCat/${c.id}')"> ${c.name}</a></li>
 				</c:forEach>
+				<li><a href="javascript:load('${ctx}/items/all')">全部</a></li>
 			</ul>
 		</li>
         <li><a href="#" class="nav-header collapsed">

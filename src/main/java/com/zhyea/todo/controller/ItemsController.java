@@ -10,6 +10,7 @@ import com.zhyea.todo.model.Items;
 import com.zhyea.todo.model.Items.Status;
 import com.zhyea.todo.service.CategoryService;
 import com.zhyea.todo.service.ItemsService;
+import com.zhyea.todo.vo.ItemsStaticVO;
 import com.zhyea.todo.vo.JsonResponse;
 
 /**
@@ -192,5 +193,14 @@ public class ItemsController extends CustomController {
 			response.setMsg("处理失败！");
 		}
 		renderJson(response);
+	}
+
+	/**
+	 * 控制台统计信息
+	 */
+	public void statistics() {
+		String duration = getPara("duration");
+		ItemsStaticVO vo = service.statistics(getUserIdInSession(), duration);
+		renderJson("vo", vo);
 	}
 }

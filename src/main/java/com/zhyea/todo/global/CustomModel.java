@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
-import com.zhyea.todo.utils.DateUtils;
+import com.zhyea.todo.utils.DateKit;
 import com.zhyea.todo.vo.BootstrapTableParams;
 
 @SuppressWarnings("rawtypes")
@@ -27,7 +27,7 @@ public abstract class CustomModel<M extends Model> extends Model<M> {
 	 */
 	@Override
 	public boolean save() {
-		String now = DateUtils.format(new Date());
+		String now = DateKit.format(new Date());
 		if (this.has("id")) {
 			super.set("update_time", now);
 			return super.update();
