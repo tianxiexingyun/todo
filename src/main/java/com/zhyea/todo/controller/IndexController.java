@@ -77,7 +77,7 @@ public class IndexController extends CustomController {
 	}
 
 	/**
-	 * 控制台
+	 * 事项
 	 */
 	public void console() {
 		renderJsp("./main/console.jsp");

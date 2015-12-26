@@ -66,7 +66,7 @@ public class NoteController extends CustomController {
 	@Before(CacheInterceptor.class)
 	@CacheName("noteCache")
 	public void data() {
-		String search = (null == getPara("search") ? "" : getPara("search"));
+		String search = getPara("search", "");
 		Page<Note> page = service.findInPage(getBootstrapTableParas(), getUserIdInSession(), search);
 		setAttr("total", page.getTotalRow());
 		setAttr("rows", page.getList());

@@ -66,8 +66,7 @@ public class UserController extends CustomController {
 	@Before(CacheInterceptor.class)
 	@CacheName("userCache")
 	public void data() {
-		String name = getPara("search");
-		name = (null == name ? "" : name);
+		String name = getPara("search", "");
 		Page<User> page = service.findInPage(getBootstrapTableParas(), name);
 		setAttr("total", page.getTotalRow());
 		setAttr("rows", page.getList());

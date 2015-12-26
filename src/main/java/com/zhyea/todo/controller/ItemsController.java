@@ -103,8 +103,7 @@ public class ItemsController extends CustomController {
 	@Before(CacheInterceptor.class)
 	@CacheName("itemsAllCache")
 	public void dataInCat() {
-		String brief = getPara("search");
-		brief = (null == brief ? "" : brief);
+		String brief = getPara("search", "");
 		Page<Items> page = service.findItemsInPage(getBootstrapTableParas(), brief, getParaToInt("catId"), getUserIdInSession());
 		setAttr("total", page.getTotalRow());
 		setAttr("rows", page.getList());
@@ -117,8 +116,7 @@ public class ItemsController extends CustomController {
 	@Before(CacheInterceptor.class)
 	@CacheName("itemsAllCache")
 	public void dataAll() {
-		String brief = getPara("search");
-		brief = (null == brief ? "" : brief);
+		String brief = getPara("search", "");
 		Page<Items> page = service.findItemsInPage(getBootstrapTableParas(), brief, getUserIdInSession());
 		setAttr("total", page.getTotalRow());
 		setAttr("rows", page.getList());
@@ -198,9 +196,9 @@ public class ItemsController extends CustomController {
 	/**
 	 * 控制台统计信息
 	 */
-	public void statistics() {
-		String duration = getPara("duration");
+	public void dataConsole() {
+		String duration = getPara("duration", "WEEK");
 		ItemsStaticVO vo = service.statistics(getUserIdInSession(), duration);
-		renderJson("vo", vo);
+		renderJson("data", vo);
 	}
 }

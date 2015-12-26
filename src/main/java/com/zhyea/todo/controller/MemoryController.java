@@ -66,7 +66,7 @@ public class MemoryController extends CustomController {
 	@Before(CacheInterceptor.class)
 	@CacheName("memoryCache")
 	public void data() {
-		String search = (null == getPara("search") ? "" : getPara("search"));
+		String search = getPara("search", "");
 		Page<Memory> page = service.findInPage(getBootstrapTableParas(), getUserIdInSession(), search);
 		setAttr("total", page.getTotalRow());
 		setAttr("rows", page.getList());

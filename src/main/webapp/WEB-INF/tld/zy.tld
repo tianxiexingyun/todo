@@ -30,7 +30,8 @@
 			<required>false</required>
 			<fragment>true</fragment>
 		</attribute>
-    </tag>   
+    </tag>
+    
     <tag>
 		<description>事件级别 选择标签</description>
         <name>itemlevel</name>
@@ -39,6 +40,33 @@
  		<attribute>
 			<name>paraName</name>
 			<required>true</required>
+			<fragment>true</fragment>
+		</attribute>
+ 		<attribute>
+			<name>themeName</name>
+			<required>true</required>
+			<fragment>true</fragment>
+		</attribute>
+ 		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<fragment>true</fragment>
+		</attribute>
+    </tag>
+    
+    <tag>
+		<description>事件周期 选择标签</description>
+        <name>duration</name>
+		<tag-class>com.zhyea.todo.tag.DurationTag</tag-class>
+		<body-content>scriptless</body-content>
+ 		<attribute>
+			<name>paraName</name>
+			<required>true</required>
+			<fragment>true</fragment>
+		</attribute>
+ 		<attribute>
+			<name>idName</name>
+			<required>false</required>
 			<fragment>true</fragment>
 		</attribute>
  		<attribute>

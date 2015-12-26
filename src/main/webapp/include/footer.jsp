@@ -13,5 +13,7 @@
 	<script src="${ctx}/statics/jqueryconfirm/jquery-confirm.js"></script>
 	<script src="${ctx}/statics/js/custom.js"></script>
 	<script src="${ctx}/statics/ckeditor/ckeditor.js"></script>
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
 </body>
 </html>

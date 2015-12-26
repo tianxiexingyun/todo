@@ -26,7 +26,7 @@ public class ItemsService {
 	CategoryService catsService = new CategoryService();
 
 	/** sql语句，查询字段 */
-	private static final String sqlSelect = "select id, user_id, category_id, brief, detail, expected_time, complete_time, status, level, deleted ";
+	private static final String sqlSelect = "select id, user_id, category_id, brief, detail, expected_time, complete_time, status, level, deleted, create_time ";
 	/** 批量删除命令 */
 	private static final String sqlBatchDelete = "delete from dt_items where id in (?1)";
 	/** 批量更新状态 */
@@ -37,9 +37,16 @@ public class ItemsService {
 	private static final String sqlBatchUpdateLevel = "update dt_items set level=? where id in (?1)";
 	/** 预计完成时间格式 */
 	private static final String EXPECTED_TIME_FORMAT = "yyyy-MM-dd HH:mm";
+	/** 事项创建日期格式 */
+	private static final String ITEMS_DATE_FORMAT = "yyyyMMdd";
 
-	enum Duration {
-		DATE, WEEK, MONTH, YEAR
+	public enum Duration {
+		DATE("当天"), WEEK("本周"), MONTH("本月"), YEAR("今年");
+		public final String des;
+
+		Duration(String _des) {
+			this.des = _des;
+		}
 	}
 
 	/**
@@ -158,10 +165,13 @@ public class ItemsService {
 		switch (d) {
 		case WEEK:
 			startTime = DateKit.format(DateKit.getThisMonday(), DateKit.FORMAT_DATE_TIME_START);
+			break;
 		case MONTH:
 			startTime = DateKit.format(DateKit.getMonthFirstDay(), DateKit.FORMAT_DATE_TIME_START);
+			break;
 		case YEAR:
 			startTime = DateKit.format(DateKit.getYearFirstDay(), DateKit.FORMAT_DATE_TIME_START);
+			break;
 		default:
 			startTime = DateKit.format(new Date(), DateKit.FORMAT_DATE_TIME_START);
 		}
@@ -174,24 +184,24 @@ public class ItemsService {
 	 * 			查询记录总数
 	 */
 	private ItemsStaticVO statistics(List<Items> list) {
-		updateRequiredColumns(list);
 		ItemsStaticVO vo = new ItemsStaticVO();
 		vo.setItemsNum(list.size());
 		Date expectedTime = null;
-		Date completeTime = null;
+		String completeTime = null;
 		for (Items item : list) {
 			expectedTime = DateKit.parse(item.getStr("expected_time"), EXPECTED_TIME_FORMAT);
-			completeTime = DateKit.parse(item.getStr("complete_time"));
+			completeTime = item.getStr("complete_time");
 			if (null == completeTime) {//结束日期为空，表示未完成
 				vo.addUnfinished(item);
 				if (DateKit.compareTo(expectedTime, new Date()) < 0) {//结束日期为空，且预期日期小于当前日期，已过期
 					vo.addTimeout(item);
+					vo.addUnfinishAndTimeoutNums();
 				}
-			} else if (DateKit.compareTo(expectedTime, completeTime) < 0) {//预期日期小于结束日期，已过期
+			} else if (DateKit.compareTo(expectedTime, DateKit.parse(completeTime)) < 0) {//预期日期小于结束日期，已过期
 				vo.addTimeout(item);
 			}
 			vo.addItemInCats(item.getStr("category_id"));
-			vo.addItemInDays(DateKit.format(DateKit.parse(item.getStr("complete_time")), DateKit.FORMAT_DATE_ONLY));
+			vo.addItemInDays(DateKit.format(DateKit.parse(item.getStr("create_time")), ITEMS_DATE_FORMAT));
 		}
 		return vo;
 	}

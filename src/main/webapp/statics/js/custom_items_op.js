@@ -1,4 +1,3 @@
-
 $('#itemsTable').bootstrapTable({});
 
 var $table = $('#itemsTable'),

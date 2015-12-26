@@ -58,8 +58,7 @@ public class CategoryController extends CustomController {
 	 * 分类信息列表数据
 	 */
 	public void data() {
-		String name = getPara("search");
-		name = (null == name ? "" : name);
+		String name = getPara("search", "");
 		Page<Category> page = service.findInPage(getBootstrapTableParas(), getUserIdInSession(), name);
 		setAttr("total", page.getTotalRow());
 		setAttr("rows", page.getList());
