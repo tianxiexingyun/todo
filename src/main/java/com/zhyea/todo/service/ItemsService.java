@@ -37,8 +37,6 @@ public class ItemsService {
 	private static final String sqlBatchUpdateLevel = "update dt_items set level=? where id in (?1)";
 	/** 预计完成时间格式 */
 	private static final String EXPECTED_TIME_FORMAT = "yyyy-MM-dd HH:mm";
-	/** 事项创建日期格式 */
-	private static final String ITEMS_DATE_FORMAT = "yyyyMMdd";
 
 	public enum Duration {
 		DATE("当天"), WEEK("本周"), MONTH("本月"), YEAR("今年");
@@ -201,7 +199,7 @@ public class ItemsService {
 				vo.addTimeout(item);
 			}
 			vo.addItemInCats(item.getStr("category_id"));
-			vo.addItemInDays(DateKit.format(DateKit.parse(item.getStr("create_time")), ITEMS_DATE_FORMAT));
+			vo.addItemInDays(DateKit.format(DateKit.parse(item.getStr("create_time")), DateKit.FORMAT_DATE_ONLY));
 		}
 		return vo;
 	}

@@ -8,12 +8,9 @@
 	</ul>
 </div>
 <div class="main">
-	<form class="form-horizontal" method="post"
-		action="${ctx}/items/dataConsole" id="consoleForm"
-		onsubmit="return doSubmit(this, getChartData);">
+	<form class="form-horizontal" method="post" action="${ctx}/items/dataConsole" id="consoleForm" onsubmit="return doSubmit(this, getChartData);">
 		<div class="col-md-2 control-input">
-			<zy:duration idName="duration" paraName="duration"
-				themeName="form-control" value="DATE" />
+			<zy:duration idName="duration" paraName="duration" themeName="form-control" value="MONTH" />
 		</div>
 		<div class="col-md-1 control-input">
 			<button class="btn btn-primary" type="submit">
@@ -23,75 +20,47 @@
 	</form>
 	<br />
 	<hr />
-	<div style="clear: both;">
-		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-		<div id="finishFrame" style="padding:56px 0px 0px 72px; float: left; width: 47%; height: 360px;"></div>
-		<div id="catsFrame" style="float: right; width: 47%; height: 360px;"></div>
-	</div>
+	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+	<div id="daysFrame" style="height: 480px;"></div>
 	<script type="text/javascript">
 		// 基于准备好的dom，初始化echarts图表
-		var catsChart = echarts.init(document.getElementById('catsFrame'));
-		var catsOption = {
+		var daysChart = echarts.init(document.getElementById('daysFrame'));
+		var daysOption = {
+			tooltip : {
+				trigger : 'axis'
+			},
+			legend : {
+				data : [ '事项数量' ]
+			},
 			toolbox : {
 				show : true,
 				feature : {
-					mark : {
-						show : true
-					},
-					dataView : {
+					mark : { show : true },
+					magicType : {
 						show : true,
-						readOnly : false
+						type : [ 'line', 'bar' ]
 					},
-					restore : {
-						show : true
-					},
-					saveAsImage : {
-						show : true
-					}
+					restore : { show : true },
+					saveAsImage : { show : true }
 				}
 			},
-			tooltip : {},
 			calculable : true,
+			xAxis : [ {
+				type : 'category',
+				boundaryGap : false
+			} ],
+			yAxis : [ {
+				type : 'value'
+			} ],
 			series : [ {
-				name : '事项分类',
-				type : 'pie',
-				radius : '55%',
-				center : [ '50%', '60%' ]
-			} ]
-		};
-
-		// 基于准备好的dom，初始化echarts图表
-		var finishChart = echarts.init(document.getElementById('finishFrame'));
-		var finishOption = {
-			tooltip : {},
-			calculable : true,
-			series : [ {
-				name : '韦恩图',
-				type : 'venn',
+				name : '事项数量',
+				type : 'line',
+				smooth : true,
 				itemStyle : {
 					normal : {
-						label : {
-							show : true,
-							textStyle : {
-								fontFamily : 'Arial, Verdana, sans-serif',
-								fontSize : 16,
-								fontStyle : 'italic',
-								fontWeight : 'bolder'
-							}
-						},
-						labelLine : {
-							show : false,
-							length : 10,
-							lineStyle : {
-								width : 1,
-								type : 'solid'
-							}
+						areaStyle : {
+							type : 'default'
 						}
-					},
-					emphasis : {
-						color : '#cc99cc',
-						borderWidth : 3,
-						borderColor : '#FF0'
 					}
 				}
 			} ]
@@ -100,16 +69,14 @@
 		function getChartData(response) {
 			var data = response.data;
 			if (data) {
-				catsOption.series[0].data = data.catsMap;
-				catsChart.hideLoading();
-				catsChart.setOption(catsOption);
-				catsChart.restore();
-
-				finishOption.series[0].data = data.finishMap;
-				finishChart.hideLoading();
-				finishChart.setOption(finishOption);
-				finishChart.restore();
+				daysOption.xAxis[0].data = data.daysKey;
+				daysOption.series[0].data = data.daysNum;
+				daysChart.hideLoading();
+				daysChart.setOption(daysOption);
+				daysChart.restore();
 			}
 		}
+		
+		$("#consoleForm").submit();
 	</script>
 </div>
