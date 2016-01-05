@@ -16,7 +16,7 @@ public class NoteService {
 
 	private final Note dao = new Note();
 	/** 查询字段 */
-	private static final String sqlSelect = "select id, user_id, brief, content, deleted ";
+	private static final String sqlSelect = "select id, user_id, brief, content, deleted, create_time ";
 	/** 查询from语句 */
 	private static final String sqlFrom = " from dt_note where deleted=0 and user_id=? and (brief like ? or content like ?)";
 	/** 批量删除命令 */

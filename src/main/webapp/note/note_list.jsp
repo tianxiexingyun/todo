@@ -23,6 +23,7 @@
 		   data-show-refresh = true
 		   data-search = true
 		   data-pagination = true
+		   data-resizable = true
 		   data-page-size = 10
      	   data-sort-name = "id"
      	   data-sort-order = "desc"
@@ -37,7 +38,8 @@
 				<th data-checkbox=true data-valign="middle" data-width="48px"  data-field="deleted">&nbsp;</th>
 				<th data-sortable=true data-valign="middle" data-width="72px"  data-field="id" data-align="left">ID</th>
 				<th data-sortable=true data-valign="middle" data-field="brief" data-formatter=noteBriefFormatter>标题</th>
-				<th data-sortable=true data-valign="middle" data-width="180px"  data-align="center" 
+				<th data-sortable=true data-valign="middle" data-width="180px"  data-field="create_time" data-align="center">日期</th>
+				<th data-sortable=true data-valign="middle" data-width="120px"  data-align="center" 
 									   data-formatter=noteOperateFormatter data-events=noteOperateEvents>操作</th>
 			</tr>
 		</thead>

@@ -18,7 +18,7 @@ public class MemoryService {
 	private final Memory dao = new Memory();
 
 	/** 查询字段 */
-	private static final String sqlSelect = "select id, user_id, brief, content, status, deleted ";
+	private static final String sqlSelect = "select id, user_id, brief, content, status, deleted, create_time ";
 	/** 查询from语句 */
 	private final static String sqlFrom = " from dt_memory where deleted=0 and user_id=? and (brief like ? or content like ?) ";
 	/** 批量删除命令 */
