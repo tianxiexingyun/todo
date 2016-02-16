@@ -63,7 +63,7 @@ public class IndexController extends CustomController {
 				}
 			}
 			response.setSuccess(false);
-			response.setMsg("用户登录信息不存在！");
+			response.setMsg("用户登录信息错误或不存在！");
 		}
 		renderJson(response);
 	}
