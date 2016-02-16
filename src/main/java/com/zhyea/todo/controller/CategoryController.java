@@ -1,6 +1,10 @@
 package com.zhyea.todo.controller;
 
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.ehcache.CacheInterceptor;
+import com.jfinal.plugin.ehcache.CacheName;
+import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.zhyea.todo.global.CustomController;
 import com.zhyea.todo.model.Category;
 import com.zhyea.todo.service.CategoryService;
@@ -36,6 +40,8 @@ public class CategoryController extends CustomController {
 	/**
 	 * 保存分类信息
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("categoryCache")
 	public void save() {
 		Category cat = getModel(Category.class, "cat");
 		setUserIdInModel(cat);
@@ -57,6 +63,8 @@ public class CategoryController extends CustomController {
 	/**
 	 * 分类信息列表数据
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("categoryCache")
 	public void data() {
 		String name = getPara("search", "");
 		Page<Category> page = service.findInPage(getBootstrapTableParas(), getUserIdInSession(), name);
@@ -68,6 +76,8 @@ public class CategoryController extends CustomController {
 	/**
 	 * 删除分类信息
 	 */
+	@Before(EvictInterceptor.class)
+	@CacheName("categoryCache")
 	public void delete() {
 		JsonResponse response = new JsonResponse("删除成功！");
 		if (!service.delete(getPara("ids"))) {

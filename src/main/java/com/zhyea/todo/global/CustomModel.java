@@ -52,4 +52,19 @@ public abstract class CustomModel<M extends Model> extends Model<M> {
 		sqlExceptSelect = sqlExceptSelect.replace("?1", bootstrapTableParams.getSort()).replace("?2", bootstrapTableParams.getOrder().name());
 		return super.paginate(pageNum, bootstrapTableParams.getLimit(), select, sqlExceptSelect, paras);
 	}
+
+	/**
+	 * 分页查询
+	 * @param bootstrapTableParams bootstrap table 请求参数
+	 * @param select	查询字段
+	 * @param sqlExceptSelect	查询条件
+	 * @param paras	查询参数
+	 * @return Page
+	 */
+	public Page<M> paginate(String cacheName, Object key, BootstrapTableParams bootstrapTableParams, String select, String sqlExceptSelect, Object... paras) {
+		int pageNum = (bootstrapTableParams.getOffset() / bootstrapTableParams.getLimit() + 1);
+		sqlExceptSelect += "order by ?1 ?2";
+		sqlExceptSelect = sqlExceptSelect.replace("?1", bootstrapTableParams.getSort()).replace("?2", bootstrapTableParams.getOrder().name());
+		return super.paginateByCache(cacheName, key, pageNum, bootstrapTableParams.getLimit(), select, sqlExceptSelect, paras);
+	}
 }

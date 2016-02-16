@@ -41,6 +41,10 @@ function getSelections(table) {
  * @param confirmMsg 提示确认信息
  */
 function doSubmit(form, callback, confirmMsg) {
+	buttonSubmit = $("button[type='submit']")[0];
+	if(buttonSubmit){
+		buttonSubmit.disabled=true; 
+	}
 	var $form = $(form);
 	var _submitFn = function() {
 		$.ajax({
@@ -63,9 +67,12 @@ function doSubmit(form, callback, confirmMsg) {
 		    	_submitFn();
 		    }
 		});
-		
 	} else {
 		_submitFn();
+	}
+	buttonSubmit = $("button[type='submit']")[0];
+	if(buttonSubmit){
+		buttonSubmit.disabled=false; 
 	}
 	return false;
 }

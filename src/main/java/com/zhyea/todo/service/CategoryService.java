@@ -1,8 +1,6 @@
 package com.zhyea.todo.service;
 
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
 import com.jfinal.plugin.activerecord.Page;
 import com.zhyea.todo.model.Category;
@@ -19,9 +17,6 @@ import com.zhyea.todo.vo.BootstrapTableParams;
 public class CategoryService {
 
 	private final Category dao = new Category();
-
-	/** 分类ID与名称映射 */
-	private static Map<Integer, String> catsMap = new Hashtable<Integer, String>();
 
 	/** 查询列 */
 	private static final String sqlSelect = "select id, name, name_en, remark, deleted ";
@@ -55,7 +50,7 @@ public class CategoryService {
 	 * @return
 	 */
 	public List<Category> findAll() {
-		return dao.find(sqlSelect + " from dt_category where deleted=0");
+		return dao.findByCache("categoryCache", "allcats", sqlSelect + " from dt_category where deleted=0");
 	}
 
 	/**
@@ -76,7 +71,6 @@ public class CategoryService {
 	 * 		是否保存成功
 	 */
 	public boolean save(Category cat) {
-		catsMap.clear();
 		return cat.save();
 	}
 
@@ -86,7 +80,6 @@ public class CategoryService {
 	 * 			记录ID
 	 */
 	public boolean delete(String ids) {
-		catsMap.clear();
 		String[] arr = ids.split(",");
 		for (String ele : arr) {
 			Integer eleInt = StringUtils.toInt(ele);
@@ -101,18 +94,15 @@ public class CategoryService {
 	 * 获取分类信息
 	 * @param catId
 	 * 			分类ID
-	 * @return
+	 * @return 分类名称
 	 */
 	public String getCat(Integer catId) {
-		if (catsMap.isEmpty()) {
-			List<Category> cats = findAll();
-			for (Category tmp : cats) {
-				catsMap.put(tmp.getInt("id"), tmp.getStr("name"));
+		List<Category> cats = findAll();
+		for (Category tmp : cats) {
+			if (tmp.getInt("id") == catId) {
+				return tmp.getStr("name");
 			}
 		}
-		if (catsMap.containsKey(catId)) {
-			return catsMap.get(catId);
-		}
-		return catsMap.get(0);
+		return "全部";
 	}
 }

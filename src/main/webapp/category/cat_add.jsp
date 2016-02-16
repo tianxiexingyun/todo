@@ -11,8 +11,7 @@
 </div>
 <div class="main">
 <div class="container panel panel-primary">
-<form class="form-horizontal" method="post" action="${ctx}/cat/save" 
-	  onsubmit="return doSubmit(this, addCatCallback);">
+<form class="form-horizontal" method="post" action="${ctx}/cat/save" onsubmit="return doSubmit(this, addCatCallback);">
 	<fieldset>
         <legend>新增分类信息</legend>
 		<div class="form-group">

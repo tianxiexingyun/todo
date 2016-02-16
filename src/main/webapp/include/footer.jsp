@@ -14,6 +14,6 @@
 	<script src="${ctx}/statics/js/custom.js"></script>
 	<script src="${ctx}/statics/ckeditor/ckeditor.js"></script>
     <!-- ECharts单文件引入 -->
-    <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+    <script src="${ctx}/statics/echarts/echarts.common.min.js"></script>
 </body>
 </html>

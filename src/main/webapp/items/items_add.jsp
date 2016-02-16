@@ -30,7 +30,7 @@
 		<div class="form-group">
 			<label class="col-md-3 control-label">预期完成时间：</label> 
 			<div class="col-md-6 control-input">
-				<input type="text" name="items.expected_time" placeholder="预期完成时间" class="form-control" id="expectedTime" required autofocus>
+				<input type="text" name="items.expected_time" placeholder="预期完成时间" class="form-control" id="expectedTime" required>
 			</div>
 		</div>
 		<div class="form-group">

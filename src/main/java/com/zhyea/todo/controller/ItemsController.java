@@ -29,7 +29,6 @@ public class ItemsController extends CustomController {
 	/**
 	 * 新增
 	 */
-	@Before(CacheInterceptor.class)
 	public void add() {
 		renderJsp("/items/items_add.jsp");
 	}
